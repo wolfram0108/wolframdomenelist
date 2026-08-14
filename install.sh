@@ -4,7 +4,8 @@
 
 JS="/www/luci-static/resources/view/homeproxy/client.js"
 SRC="../../../../../wolfram0108/wolframdomenelist/releases/latest/download/domains"
-TITLE="Список Wolfram"
+# Только ASCII: кириллица при вставке через sed на busybox повреждается
+TITLE="Wolfram domain list"
 MARK="wolframdomenelist"
 
 if [ ! -f "$JS" ]; then

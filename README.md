@@ -15,11 +15,13 @@
 
 Панель формирует адрес загрузки списка подстановкой значения источника, поэтому свой список подключается добавлением одного пункта в выпадающее меню.
 
-Выполнить на роутере одной командой:
+Подключиться на роутере по SSH и выполнить одну команду:
 
 ```sh
-grep -q wolframdomenelist /www/luci-static/resources/view/homeproxy/client.js || sed -i "s|so.value('refilter',|so.value('../../../../../wolfram0108/wolframdomenelist/releases/latest/download/domains', _('Список Wolfram'));\n\t\t\tso.value('refilter',|" /www/luci-static/resources/view/homeproxy/client.js
+wget -qO- https://raw.githubusercontent.com/wolfram0108/wolframdomenelist/main/install.sh | sh
 ```
+
+Скрипт проверит наличие панели, сделает резервную копию и добавит пункт в меню. Повторный запуск безопасен — если список уже подключён, ничего не изменится.
 
 Затем обновить страницу панели с очисткой кэша (`Ctrl+F5`) и добавить правило:
 
@@ -34,6 +36,12 @@ grep -q wolframdomenelist /www/luci-static/resources/view/homeproxy/client.js ||
 Нажать **Применить**. Список скачается автоматически и дальше будет обновляться раз в сутки.
 
 > **Внимание.** Файл `client.js` принадлежит пакету панели, поэтому после обновления `luci-app-re-homeproxy` пункт меню пропадёт — команду нужно выполнить снова. Признак: пункт «Список Wolfram» исчез из выпадающего меню, правило перестало обновляться.
+
+Отключить список — восстановить файл панели из резервной копии:
+
+```sh
+mv /www/luci-static/resources/view/homeproxy/client.js.bak /www/luci-static/resources/view/homeproxy/client.js
+```
 
 ## Подключение в других клиентах
 

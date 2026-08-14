@@ -1,0 +1,61 @@
+name: Сборка набора правил
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'domains.lst'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить исходники
+        uses: actions/checkout@v4
+
+      - name: Установить sing-box
+        run: |
+          VER=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | jq -r .tag_name)
+          curl -sL -o sb.tar.gz "https://github.com/SagerNet/sing-box/releases/download/${VER}/sing-box-${VER#v}-linux-amd64.tar.gz"
+          tar xzf sb.tar.gz
+          sudo mv sing-box-*/sing-box /usr/local/bin/
+          sing-box version
+
+      - name: Собрать исходник набора правил
+        run: |
+          node -e '
+            const fs = require("fs");
+            const lines = fs.readFileSync("domains.lst", "utf8")
+              .split(/\r?\n/)
+              .map(s => s.trim())
+              .filter(s => s && !s.startsWith("#"));
+            const uniq = [...new Set(lines)].sort();
+            fs.writeFileSync("domains.json", JSON.stringify({
+              version: 3,
+              rules: [{ domain_suffix: uniq }]
+            }, null, 2));
+            console.log("Доменов:", uniq.length);
+          '
+
+      - name: Скомпилировать
+        run: |
+          sing-box rule-set compile --output domains.srs domains.json
+          ls -la domains.srs
+
+      - name: Опубликовать релиз
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          COUNT=$(grep -vcE '^\s*(#|$)' domains.lst)
+          DATE=$(date +'%Y-%m-%d %H:%M')
+          gh release delete latest --yes --cleanup-tag 2>/dev/null || true
+          gh release create latest domains.srs domains.json \
+            --title "Актуальный список" \
+            --notes "Доменов: **${COUNT}**. Обновлено: ${DATE} UTC.
+
+          Прямая ссылка: \`https://github.com/${{ github.repository }}/releases/latest/download/domains.srs\`"

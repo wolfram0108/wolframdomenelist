@@ -42,10 +42,32 @@ jobs:
             console.log("Доменов:", uniq.length);
           '
 
+      - name: Собрать плоский текстовый список
+        run: |
+          # domains.txt — нормализованная копия исходника: без комментариев,
+          # пустых строк и дублей, отсортирована. Для инструментов, которые
+          # понимают только простой текст (zapret, keen-pbr, AdGuard, dnsmasq).
+          grep -vE '^\s*(#|$)' domains.lst | tr -d '\r' | sed 's/^\s*//; s/\s*$//' | sort -u > domains.txt
+          wc -l domains.txt
+
       - name: Скомпилировать
         run: |
           sing-box rule-set compile --output domains.srs domains.json
           ls -la domains.srs
+
+      - name: Зафиксировать сгенерированные файлы в main
+        run: |
+          # Без этого шага raw-ссылка на domains.json устаревает: подписчики
+          # (podkop и прочие клиенты sing-box) тянут файл именно из ветки main.
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add domains.json domains.txt
+          if git diff --cached --quiet; then
+            echo "Изменений в сгенерированных файлах нет"
+          else
+            git commit -m "Пересборка списка из domains.lst"
+            git push
+          fi
 
       - name: Опубликовать релиз
         env:
@@ -54,8 +76,12 @@ jobs:
           COUNT=$(grep -vcE '^\s*(#|$)' domains.lst)
           DATE=$(date +'%Y-%m-%d %H:%M')
           gh release delete latest --yes --cleanup-tag 2>/dev/null || true
-          gh release create latest domains.srs domains.json \
+          gh release create latest domains.srs domains.json domains.txt domains.lst \
             --title "Актуальный список" \
             --notes "Доменов: **${COUNT}**. Обновлено: ${DATE} UTC.
 
-          Прямая ссылка: \`https://github.com/${{ github.repository }}/releases/latest/download/domains.srs\`"
+          | Формат | Ссылка |
+          |---|---|
+          | sing-box (binary) | \`https://github.com/${{ github.repository }}/releases/latest/download/domains.srs\` |
+          | sing-box (source) | \`https://github.com/${{ github.repository }}/releases/latest/download/domains.json\` |
+          | простой текст | \`https://github.com/${{ github.repository }}/releases/latest/download/domains.txt\` |"

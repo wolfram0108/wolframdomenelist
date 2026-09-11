@@ -80,6 +80,7 @@ annas-archive.org
 ansys.com
 anthropic.com
 any.do
+anydesk.com
 aol.com
 apachetorrent.com
 api.jetbrains.ai
@@ -137,6 +138,7 @@ blinkshot.io
 bluehost.com
 booktracker.org
 boominfo.org
+boot.net.anydesk.com
 booth.pm
 booth.pximg.net
 bosch.com
@@ -204,6 +206,7 @@ cline.bot
 clip.opus.pro
 clmclm.com
 cloudflare-ech.com
+cloudflare.com
 cloudfront.net
 cloudtorrents.com
 cms-twdigitalassets.com
@@ -421,6 +424,8 @@ gfn.am
 ghostrc.game.idtech.services
 gifyu.com
 git.new
+gitbook.com
+github.com
 githubusercontent.com
 glavred.info
 glavred.net
@@ -705,6 +710,7 @@ neformat.com.ua
 nekobt.to
 nekoray.org
 neo4j.com
+net.anydesk.com
 netacad.com
 netapp.com
 netflix.ca
@@ -761,6 +767,7 @@ novyny.live
 ntc.party
 ntp.msn.com
 nude-moon.org
+nvidia.com
 nxp.com
 nyaa.iss.ink
 nyaa.land
@@ -840,7 +847,9 @@ pkg-zone.com
 pkgs.tailscale.com
 platform.activestate.com
 playboy.com
+playerok.com
 playss14.com
+plex.tv
 plugshare.com
 polit.ru
 politico.eu
@@ -913,6 +922,7 @@ redis.io
 redislabs.com
 redshieldvpn.com
 refactoring.guru
+relay.net.anydesk.com
 remna.st
 remove.bg
 render-state.to
@@ -1095,6 +1105,7 @@ sysdig.com
 t-invariant.org
 t.co
 tableau.com
+tailwindcss.com
 talosintelligence.com
 tampermonkey.net
 tayga.info
@@ -1333,16 +1344,3 @@ zerkalo.io
 zktorrent.com
 zona.media
 zone-torrent.com
-pythonhosted.org
-plex.tv
-tailwindcss.com
-cloudflare.com
-gitbook.com
-nvidia.com
-playerok.com
-anydesk.com
-net.anydesk.com
-boot.net.anydesk.com
-relay.net.anydesk.com
-github.com
-yani.tv

@@ -1320,7 +1320,6 @@ yts.proxyninja.org
 yts.torrentbay.st
 yts.torrentsbay.org
 yts.unblockninja.com
-yummyani.me
 yummyanime.tv
 z.ai
 zahav.ru
@@ -1334,3 +1333,16 @@ zerkalo.io
 zktorrent.com
 zona.media
 zone-torrent.com
+pythonhosted.org
+plex.tv
+tailwindcss.com
+cloudflare.com
+gitbook.com
+nvidia.com
+playerok.com
+anydesk.com
+net.anydesk.com
+boot.net.anydesk.com
+relay.net.anydesk.com
+github.com
+yani.tv

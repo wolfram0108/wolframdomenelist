@@ -361,6 +361,7 @@ fbcdn.net
 fbsbx.com
 fedoraproject.org
 ficbook.net
+figma.com
 filebin.net
 filmitorrent.net
 filmix.ac
@@ -682,6 +683,7 @@ mixcloud.com
 mkvtoolnix.download
 mlr.press
 modrinth.com
+mojang.com
 mongodb.com
 monolisa.dev
 monoprice.com
@@ -710,6 +712,7 @@ neformat.com.ua
 nekobt.to
 nekoray.org
 neo4j.com
+neoforged.net
 net.anydesk.com
 netacad.com
 netapp.com
@@ -764,6 +767,7 @@ novaya.no
 novayagazeta.eu
 novayagazeta.ru
 novyny.live
+npmjs.org
 ntc.party
 ntp.msn.com
 nude-moon.org
@@ -1180,6 +1184,7 @@ torrenttip220.top
 trae.ai
 trailblazer.me
 trailhead.com
+trailhq.com
 trakt.tv
 transferwise.com
 trellix.com
@@ -1218,6 +1223,7 @@ twttr.net
 twvid.com
 typing.com
 uaudio.com
+ubuntu.com
 ui.ill.in.ua
 uindex.org
 uizard.io
